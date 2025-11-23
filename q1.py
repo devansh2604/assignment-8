@@ -1,20 +1,13 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
-
-class Node {
-public:
+struct Node {
     int data;
     Node *left, *right;
-
-    Node(int val) {
-        data = val;
-        left = right = NULL;
-    }
+    Node(int v): data(v), left(nullptr), right(nullptr) {}
 };
-
 void preorder(Node* root) {
     if (!root) return;
-    cout << root->data << " ";
+    cout << root->data << ' ';
     preorder(root->left);
     preorder(root->right);
 }
@@ -22,7 +15,7 @@ void preorder(Node* root) {
 void inorder(Node* root) {
     if (!root) return;
     inorder(root->left);
-    cout << root->data << " ";
+    cout << root->data << ' ';
     inorder(root->right);
 }
 
@@ -30,22 +23,23 @@ void postorder(Node* root) {
     if (!root) return;
     postorder(root->left);
     postorder(root->right);
-    cout << root->data << " ";
+    cout << root->data << ' ';
 }
 
 int main() {
-    Node* root = new Node(10);
-    root->left = new Node(5);
-    root->right = new Node(20);
-
-    preorder(root);
-    cout << endl;
-
-    inorder(root);
-    cout << endl;
-
-    postorder(root);
-    cout << endl;
-
+    // sample tree:
+    //      1
+    //     / \
+    //    2   3
+    //   / \
+    //  4   5
+    Node *root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+    cout << "Preorder: "; preorder(root); cout << '\n';
+    cout << "Inorder:  "; inorder(root); cout << '\n';
+    cout << "Postorder:"; postorder(root); cout << '\n';
     return 0;
 }
